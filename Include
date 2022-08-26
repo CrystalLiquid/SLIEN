@@ -1,1 +1,10 @@
-
+You might need to add third party library
+as follows
+DX SDK
+Vulkan SDK
+GLFW GLEW
+GLAD for backup in case there are bugs around
+EASYX
+SDL2
+GLM
+EIGEN

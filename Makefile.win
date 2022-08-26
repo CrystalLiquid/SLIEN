@@ -1,0 +1,40 @@
+# Project: SLIEN
+# Makefile created by Dev-C++ 6.7.5
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = SLIEN/IOSystem/IO.o SLIEN/RenderAPI/SL_Utility.o SLIEN/RenderAPI/DX/SLIEN_DX.o SLIEN/SLIEN.o
+LINKOBJ  = SLIEN/IOSystem/IO.o SLIEN/RenderAPI/SL_Utility.o SLIEN/RenderAPI/DX/SLIEN_DX.o SLIEN/SLIEN.o
+LIBS     = -L"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/10.3.0/" -L"E:/Dev-Cpp/MinGW64/lib/gcc/" -L"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/" -L"E:/Dev-Cpp/MinGW64/lib/" -L"E:/Dev-Cpp/MinGW64/lib" -L"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -s -lopengl32 -lopengl32 E:/Dev-Cpp/MinGW32/lib/libglew32.dll.a Lib/vulkan-1.lib Lib/libglfw3dll.a Lib/SPE.a Lib/VkLayer_utils.lib E:/Dev-Cpp/MinGW32/lib/libglfw3.dll.a Lib/volk.lib -static
+INCS     = -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/10.3.0/include" -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/SLIEN/Include/Vulkan" -I"D:/SLIEN/Include/SPE" -I"D:/SLIEN/Include/vk_video" -I"D:/SLIEN/SLIEN/IOSystem" -I"D:/SLIEN/Public" -I"D:/SLIEN/Include/DX/DX11" -I"D:/SLIEN/Include/GLFW" -I"D:/SLIEN/DXUT"
+CXXINCS  = -I"E:/Dev-Cpp/MinGW64/include/c++/10.3.0" -I"E:/Dev-Cpp/MinGW64/include/c++/10.3.0/x86_64-w64-mingw32" -I"E:/Dev-Cpp/MinGW64/include/c++/10.3.0/backward" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/10.3.0/include" -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/新建文件夹/SLIEN" -I"D:/SLIEN/Include/Vulkan" -I"D:/SLIEN/Include/SPE" -I"D:/SLIEN/Include/vk_video" -I"D:/SLIEN/SLIEN/IOSystem" -I"D:/SLIEN/Public" -I"D:/SLIEN/Include/DX/DX11" -I"D:/SLIEN/Include/GLFW" -I"D:/SLIEN/DXUT"
+BIN      = RuntimeApp/SLIEN.dll
+CXXFLAGS = $(CXXINCS) -O2 -std=c++11 -DBUILDING_DLL=1
+ENCODINGS = -finput-charset=utf-8 -fexec-charset=gbk
+CFLAGS   = $(INCS) -O2 -std=c++11 -DBUILDING_DLL=1
+RM       = del /q /f
+DEF      = RuntimeApp/libSLIEN.def
+STATIC   = RuntimeApp/libSLIEN.a
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN) $(DEF) $(STATIC)
+
+$(BIN): $(LINKOBJ)
+	$(CPP) -mdll $(LINKOBJ) -o "$(BIN)" $(LIBS) -Wl,--output-def,$(DEF),--out-implib,$(STATIC)
+
+SLIEN/IOSystem/IO.o: SLIEN/IOSystem/IO.cpp
+	$(CPP) -c SLIEN/IOSystem/IO.cpp -o SLIEN/IOSystem/IO.o $(CXXFLAGS) 
+
+SLIEN/RenderAPI/SL_Utility.o: SLIEN/RenderAPI/SL_Utility.cpp SLIEN/RenderAPI/SL_Utility.h
+	$(CPP) -c SLIEN/RenderAPI/SL_Utility.cpp -o SLIEN/RenderAPI/SL_Utility.o $(CXXFLAGS) 
+
+SLIEN/RenderAPI/DX/SLIEN_DX.o: SLIEN/RenderAPI/DX/SLIEN_DX.cpp SLIEN/RenderAPI/DX/SLIEN_DX.h
+	$(CPP) -c SLIEN/RenderAPI/DX/SLIEN_DX.cpp -o SLIEN/RenderAPI/DX/SLIEN_DX.o $(CXXFLAGS) 
+
+SLIEN/SLIEN.o: SLIEN/SLIEN.cpp
+	$(CPP) -c SLIEN/SLIEN.cpp -o SLIEN/SLIEN.o $(CXXFLAGS) 
